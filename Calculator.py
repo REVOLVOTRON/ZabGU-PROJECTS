@@ -7,7 +7,7 @@ class Calculator(QWidget):
         super().__init__()
 
         self.setWindowTitle("Calculator")
-        self.setFixedSize(200, 250)
+        self.setFixedSize(200, 200)
 
         self.initUI()
 
@@ -51,13 +51,17 @@ class Calculator(QWidget):
             except Exception as e:
                 self.display.setText('Error')
         elif text == '%':
-            try:
+            if self.display.text() != '':
                 value = float(self.display.text())
                 self.display.setText(str(value / 100))
-            except ValueError:
+            else:
                 self.display.setText('Error')
         else:
-            self.display.setText(self.display.text() + text)
+            if self.display.text() == 'Error':
+                self.display.setText('')
+                self.display.setText(self.display.text() + text)
+            else:
+                self.display.setText(self.display.text() + text)
 
 
 if __name__ == '__main__':
