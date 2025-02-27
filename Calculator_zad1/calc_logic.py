@@ -1,13 +1,13 @@
 class CalculatorLogic:
     def __init__(self, gui):
-        self.gui = gui  # Привязываем GUI для обновления экрана
+        self.gui = gui
 
     def normalize_number(self, text):
         """Нормализует число, удаляя лишние нули"""
-        if '.' in text:  # Дробное число
-            return str(float(text))  # Преобразуем в float и обратно в строку
-        else:  # Целое число
-            return str(int(text))  # Преобразуем в int и обратно в строку
+        if '.' in text:
+            return str(float(text))
+        else:
+            return str(int(text))
 
     def on_button_click(self, text):
         """Обрабатывает нажатие кнопки"""

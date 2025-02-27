@@ -5,23 +5,22 @@ from PyQt6.QtCore import Qt
 class CalculatorGUI(QWidget):
     def __init__(self, controller):
         super().__init__()
-        self.controller = controller  # Привязываем контроллер для обработки событий
+        self.controller = controller
         self.setWindowTitle("Calculator")
         self.setFixedSize(200, 200)
         self.initUI()
 
     def initUI(self):
-        # Создаем основной макет
         self.layout = QVBoxLayout()
 
         # Поле ввода (теперь редактируемое)
         self.display = QLineEdit()
-        self.display.setAlignment(Qt.AlignmentFlag.AlignRight)  # Текст выравнивается по правому краю
-        self.display.returnPressed.connect(self.on_return_pressed)  # Обработка нажатия Enter
-        self.display.textChanged.connect(self.validate_input)  # Проверка вводимых символов
+        self.display.setAlignment(Qt.AlignmentFlag.AlignRight)
+        self.display.returnPressed.connect(self.on_return_pressed)
+        self.display.textChanged.connect(self.validate_input)
         self.layout.addWidget(self.display)
 
-        # Создаем сетку для кнопок
+        # Сетка для кнопок
         grid_layout = QGridLayout()
         buttons = [
             ('7', 0, 0), ('8', 0, 1), ('9', 0, 2), ('/', 0, 3),
@@ -43,11 +42,11 @@ class CalculatorGUI(QWidget):
         self.setLayout(self.layout)
 
     def on_return_pressed(self):
-        """Обрабатывает нажатие клавиши Enter"""
+        # Обрабатывает нажатие клавиши Enter
         self.controller.on_button_click('=')
 
     def validate_input(self, text):
-        """Проверяет введенные символы и удаляет недопустимые"""
+        # Проверяет введенные символы и удаляет недопустимые
         allowed_chars = "0123456789+-*/().% "
         filtered_text = ''.join([char for char in text if char in allowed_chars])
 
@@ -66,5 +65,4 @@ class CalculatorGUI(QWidget):
             self.display.setText(filtered_text)
 
     def update_display(self, text):
-        """Обновляет текст в поле вывода"""
         self.display.setText(text)
